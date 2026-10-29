@@ -1,0 +1,83 @@
+{
+  "entities": {
+    "User": {
+      "path": "users/{userId}",
+      "fields": {
+        "userId": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "walletBalance": { "type": "number" },
+        "isBanned": { "type": "boolean" },
+        "banReason": { "type": "string" },
+        "role": { "type": "string" },
+        "supervisorCode": { "type": "string" },
+        "totalOrdersCount": { "type": "number" },
+        "totalSpent": { "type": "number" },
+        "createdAt": { "type": "timestamp" },
+        "updatedAt": { "type": "timestamp" }
+      }
+    },
+    "Order": {
+      "path": "orders/{orderId}",
+      "fields": {
+        "orderId": { "type": "string" },
+        "userId": { "type": "string" },
+        "itemsSummary": { "type": "string" },
+        "status": { "type": "string" },
+        "subtotal": { "type": "number" },
+        "deliveryFee": { "type": "number" },
+        "finalTotal": { "type": "number" },
+        "qenaZone": { "type": "string" },
+        "deliveryType": { "type": "string" },
+        "paymentMethod": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "customerAddress": { "type": "string" },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "timestamp" },
+        "updatedAt": { "type": "timestamp" }
+      }
+    },
+    "PaymentRequest": {
+      "path": "payment_requests/{requestId}",
+      "fields": {
+        "requestId": { "type": "string" },
+        "userId": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "amount": { "type": "number" },
+        "paymentMethod": { "type": "string" },
+        "screenshotProof": { "type": "string" },
+        "aiVerificationStatus": { "type": "string" },
+        "aiNotes": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "timestamp" },
+        "updatedAt": { "type": "timestamp" }
+      }
+    },
+    "MenuOverride": {
+      "path": "menu_overrides/{itemId}",
+      "fields": {
+        "itemId": { "type": "string" },
+        "nameAr": { "type": "string" },
+        "priceSingle": { "type": "number" },
+        "priceSmall": { "type": "number" },
+        "priceMedium": { "type": "number" },
+        "priceLarge": { "type": "number" },
+        "isAvailable": { "type": "boolean" },
+        "updatedBy": { "type": "string" },
+        "updatedAt": { "type": "timestamp" }
+      }
+    },
+    "RestaurantConfig": {
+      "path": "app_settings/restaurant_config",
+      "fields": {
+        "ownerUserId": { "type": "string" },
+        "ownerEmail": { "type": "string" },
+        "activeSupervisors": { "type": "list" },
+        "updatedAt": { "type": "timestamp" }
+      }
+    }
+  }
+}

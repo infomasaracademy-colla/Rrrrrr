@@ -1,0 +1,6 @@
+{
+  "name": "RISK Fast Foods",
+  "description": "تطبيق مطعم ريسك للوجبات السريعة - تصفح المنيو الكامل والأسعار والطلب المباشر والدليفري",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

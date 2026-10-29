@@ -1,0 +1,8 @@
+{
+  "firestore": [
+    {
+      "database": "ai-studio-android-riskfast-e80af421-9a41-4f95-8e8b-a960a22c8f1a",
+      "rules": "firestore.rules"
+    }
+  ]
+}

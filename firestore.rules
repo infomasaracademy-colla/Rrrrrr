@@ -1,0 +1,50 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwnerOrAdmin() {
+      return isAuthenticated() && (
+        request.auth.token.email == "youalla565@gmail.com" ||
+        exists(/databases/$(database)/documents/app_settings/restaurant_config) &&
+        get(/databases/$(database)/documents/app_settings/restaurant_config).data.ownerUserId == request.auth.uid
+      );
+    }
+
+    // Users collection
+    match /users/{userId} {
+      allow read: if isAuthenticated() && (request.auth.uid == userId || isOwnerOrAdmin());
+      allow create: if isAuthenticated() && request.auth.uid == userId;
+      allow update: if isAuthenticated() && (request.auth.uid == userId || isOwnerOrAdmin());
+    }
+
+    // Orders collection
+    match /orders/{orderId} {
+      allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || isOwnerOrAdmin());
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if isAuthenticated() && isOwnerOrAdmin();
+    }
+
+    // Payment Requests & Top-Up Screenshots
+    match /payment_requests/{requestId} {
+      allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || isOwnerOrAdmin());
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if isAuthenticated() && isOwnerOrAdmin();
+    }
+
+    // Menu Overrides (Prices and availability)
+    match /menu_overrides/{itemId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && isOwnerOrAdmin();
+    }
+
+    // Global Restaurant Config (Owner & Sub-admins)
+    match /app_settings/restaurant_config {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated();
+    }
+  }
+}
